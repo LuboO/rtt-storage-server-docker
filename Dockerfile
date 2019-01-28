@@ -12,7 +12,8 @@ RUN apt update && \
 	
 COPY sshd_config /etc/ssh/
 COPY rtt-storage-server-entrypoint.sh /usr/local/bin/
-VOLUME /rtt_storage_server
+ENV RTT_STORAGE_SERVER_DIR=/rtt_storage_server
+VOLUME ["$RTT_STORAGE_SERVER_DIR"]
 EXPOSE 22
 
-ENTRYPOINT ["rtt-storage-server-entrypoint.sh", "/rtt_storage_server"]
+ENTRYPOINT ["rtt-storage-server-entrypoint.sh", "$RTT_STORAGE_SERVER_DIR"]
